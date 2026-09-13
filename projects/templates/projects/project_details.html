@@ -40,6 +40,14 @@
     <button onclick="previousImage()">Previous</button>
     <button onclick="nextImage()">Next</button>
 
+    <br>
+
+<a href="{% url 'donation_page' project.id %}">
+    <button>Donate</button>
+</a>
+
+<br><br>
+
     <h2>Similar Projects</h2>
 
     {% if similar_projects %}
