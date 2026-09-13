@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Project</title>
+</head>
+
+<body>
+
+    <h1>Create Project</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Title:</label>
+        <input type="text" name="title" required>
+        <br><br>
+
+        <label>Description:</label>
+        <textarea name="description" required></textarea>
+        <br><br>
+
+        <label>Total Target:</label>
+        <input type="number" name="total_target" required>
+        <br><br>
+
+        <label>Start Time:</label>
+        <input type="datetime-local" name="start_time" required>
+        <br><br>
+
+        <label>End Time:</label>
+        <input type="datetime-local" name="end_time" required>
+        <br><br>
+
+        <label>Category:</label>
+        <select name="category" required>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label>Tags:</label>
+        <select name="tags" multiple required>
+            {% for tag in tags %}
+                <option value="{{ tag.id }}">{{ tag.name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label>Picture 1:</label>
+        <input type="file" name="pictures">
+        <br><br>
+
+        <label>Picture 2:</label>
+        <input type="file" name="pictures">
+        <br><br>
+
+        <label>Picture 3:</label>
+        <input type="file" name="pictures">
+        <br><br>
+
+        <button type="submit">Create Project</button>
+
+    </form>
+
+</body>
+</html>

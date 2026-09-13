@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ project.title }}</title>
+</head>
+
+<body>
+
+    <h1>{{ project.title }}</h1>
+
+    <p>{{ project.description }}</p>
+
+    <h2>Project Information</h2>
+
+    <p><strong>Total Target:</strong> {{ project.total_target }}</p>
+    <p><strong>Category:</strong> {{ project.category.name }}</p>
+    <p><strong>Start Time:</strong> {{ project.start_time }}</p>
+    <p><strong>End Time:</strong> {{ project.end_time }}</p>
+
+    <h3>Tags</h3>
+
+    {% for tag in project.tags.all %}
+        <span>{{ tag.name }}</span>
+    {% empty %}
+        <p>No tags available.</p>
+    {% endfor %}
+
+    <h3>Project Pictures</h3>
+
+    <div>
+        {% for picture in project.pictures.all %}
+            <img src="{{ picture.picture.url }}" width="300" class="project-image">
+        {% empty %}
+            <p>No pictures available.</p>
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <button onclick="previousImage()">Previous</button>
+    <button onclick="nextImage()">Next</button>
+
+    <h2>Similar Projects</h2>
+
+    {% if similar_projects %}
+        {% for similar_project in similar_projects %}
+            <div>
+                <h3>{{ similar_project.title }}</h3>
+                <p>{{ similar_project.description }}</p>
+                <p><strong>Target:</strong> {{ similar_project.total_target }}</p>
+
+                <a href="{% url 'project_details' similar_project.id %}">
+                    View Project
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No similar projects available.</p>
+    {% endif %}
+
+    <script>
+        let images = document.querySelectorAll('.project-image');
+        let currentImage = 0;
+
+        function showImage() {
+            images.forEach(function(image) {
+                image.style.display = 'none';
+            });
+
+            if (images.length > 0) {
+                images[currentImage].style.display = 'block';
+            }
+        }
+
+        function nextImage() {
+            currentImage++;
+
+            if (currentImage >= images.length) {
+                currentImage = 0;
+            }
+
+            showImage();
+        }
+
+        function previousImage() {
+            currentImage--;
+
+            if (currentImage < 0) {
+                currentImage = images.length - 1;
+            }
+
+            showImage();
+        }
+
+        showImage();
+    </script>
+
+</body>
+</html>
