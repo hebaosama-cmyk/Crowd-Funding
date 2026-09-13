@@ -1,3 +1,4 @@
+
 """
 Django settings for crowdfunding project.
 
@@ -13,16 +14,20 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
+
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = 'django-insecure-!#-a@ge%8w(5o_=sg^js6$fvtdf_k4ug$fjt_ut%j%g27dy^p_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -37,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'accounts',
     'projects',
     'donations',
 ]
@@ -72,7 +79,8 @@ WSGI_APPLICATION = 'crowdfunding.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/6.1/ref/settings/#databases
+
+# https://docs.djangoproject.com/en/6.1/ref/databases/
 
 DATABASES = {
     'default': {
@@ -83,6 +91,7 @@ DATABASES = {
 
 
 # Password validation
+
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -102,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
+
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
@@ -114,12 +124,14 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
 
 
 # Email
+
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
 MAILERS = {
@@ -129,5 +141,18 @@ MAILERS = {
 }
 
 
+# Custom User Model
+
+AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = [
+    'accounts.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+# Media files
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
